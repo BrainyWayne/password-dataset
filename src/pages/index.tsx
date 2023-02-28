@@ -190,6 +190,12 @@ export default function HomePage() {
                 <button
                   className='rounded bg-slate-100 px-3 py-1'
                   onClick={() => {
+                    //Ask if user is sure user wants to load the data
+                    const res = confirm(
+                      'Are you sure you want to load the data? This will overwrite your current data.'
+                    );
+                    if (!res) return;
+
                     localStorage.setItem(
                       'adjectives1',
                       JSON.stringify(ADJECTIVES1)
