@@ -129,6 +129,11 @@ export default function HomePage() {
                   <option value='noun'>Noun</option>
                   <option value='verb'>Verb</option>
                 </select>
+
+                <div>
+                  Total:{' '}
+                  {syllable1.length + syllable2.length + syllable3.length}{' '}
+                </div>
               </div>
 
               {/* Undo Button and it sticks to the top of page. After action is done, remove undo item */}
