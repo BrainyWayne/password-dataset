@@ -252,9 +252,15 @@ export default function HomePage() {
                     );
                     if (!res) return;
 
-                    const newSyllable1 = [...new Set(syllable1)];
-                    const newSyllable2 = [...new Set(syllable2)];
-                    const newSyllable3 = [...new Set(syllable3)];
+                    const newSyllable1 = syllable1.filter(
+                      (item, index) => syllable1.indexOf(item) === index
+                    );
+                    const newSyllable2 = syllable2.filter(
+                      (item, index) => syllable2.indexOf(item) === index
+                    );
+                    const newSyllable3 = syllable3.filter(
+                      (item, index) => syllable3.indexOf(item) === index
+                    );
 
                     setSyllable1(newSyllable1);
                     setSyllable2(newSyllable2);
