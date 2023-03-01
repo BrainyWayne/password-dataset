@@ -135,9 +135,7 @@ export default function HomePage() {
                   {syllable1.length + syllable2.length + syllable3.length}{' '}
                 </div>
               </div>
-
               {/* Undo Button and it sticks to the top of page. After action is done, remove undo item */}
-
               <div className='fixed top-0 right-0 mt-5 mr-5'>
                 <button
                   className='rounded bg-slate-100 px-3 py-1'
@@ -189,7 +187,6 @@ export default function HomePage() {
                   Undo
                 </button>
               </div>
-
               {/* Button at the top left to load the initial data to local storage */}
               <div className='fixed top-0 left-0 mt-5 ml-5'>
                 <button
@@ -242,6 +239,29 @@ export default function HomePage() {
                   }}
                 >
                   Load Initial Data
+                </button>
+              </div>
+              {/* Button at the top left beneath the initial data button that removes all duplicates from the syllables */}
+              <div className='fixed top-0 left-0 mt-20 ml-5'>
+                <button
+                  className='rounded bg-slate-100 px-3 py-1'
+                  onClick={() => {
+                    //Ask if user is sure user wants to load the data
+                    const res = confirm(
+                      'Are you sure you want to remove all duplicates? This will overwrite your current data.'
+                    );
+                    if (!res) return;
+
+                    const newSyllable1 = [...new Set(syllable1)];
+                    const newSyllable2 = [...new Set(syllable2)];
+                    const newSyllable3 = [...new Set(syllable3)];
+
+                    setSyllable1(newSyllable1);
+                    setSyllable2(newSyllable2);
+                    setSyllable3(newSyllable3);
+                  }}
+                >
+                  Remove Duplicates
                 </button>
               </div>
 
