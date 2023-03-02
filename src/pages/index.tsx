@@ -25,6 +25,7 @@ export default function HomePage() {
   const [syllable1, setSyllable1] = useState<string[]>([]);
   const [syllable2, setSyllable2] = useState<string[]>([]);
   const [syllable3, setSyllable3] = useState<string[]>([]);
+  const [version, setVersion] = useState('1');
   const [undo, setUndo] = useState<{
     action: 'delete' | 'move';
     value: string;
@@ -36,21 +37,21 @@ export default function HomePage() {
 
   //Handle list change. Get the data from local storage
   React.useEffect(() => {
-    const adjectives1 = localStorage.getItem('adjectives1');
-    const adjectives2 = localStorage.getItem('adjectives2');
-    const adjectives3 = localStorage.getItem('adjectives3');
-    const adverb1 = localStorage.getItem('adverb1');
-    const adverb2 = localStorage.getItem('adverb2');
-    const adverb3 = localStorage.getItem('adverb3');
-    const noun1 = localStorage.getItem('noun1');
-    const noun2 = localStorage.getItem('noun2');
-    const noun3 = localStorage.getItem('noun3');
-    const preposition1 = localStorage.getItem('preposition1');
-    const preposition2 = localStorage.getItem('preposition2');
-    const preposition3 = localStorage.getItem('preposition3');
-    const verb1 = localStorage.getItem('verb1');
-    const verb2 = localStorage.getItem('verb2');
-    const verb3 = localStorage.getItem('verb3');
+    const adjectives1 = localStorage.getItem('adjectives1' + version);
+    const adjectives2 = localStorage.getItem('adjectives2' + version);
+    const adjectives3 = localStorage.getItem('adjectives3' + version);
+    const adverb1 = localStorage.getItem('adverb1' + version);
+    const adverb2 = localStorage.getItem('adverb2' + version);
+    const adverb3 = localStorage.getItem('adverb3' + version);
+    const noun1 = localStorage.getItem('noun1' + version);
+    const noun2 = localStorage.getItem('noun2' + version);
+    const noun3 = localStorage.getItem('noun3' + version);
+    const preposition1 = localStorage.getItem('preposition1' + version);
+    const preposition2 = localStorage.getItem('preposition2' + version);
+    const preposition3 = localStorage.getItem('preposition3' + version);
+    const verb1 = localStorage.getItem('verb1' + version);
+    const verb2 = localStorage.getItem('verb2' + version);
+    const verb3 = localStorage.getItem('verb3' + version);
 
     if (list == 'adjective') {
       setSyllable1(JSON.parse(adjectives1 ?? '[]'));
@@ -77,30 +78,30 @@ export default function HomePage() {
       setSyllable2([]);
       setSyllable3([]);
     }
-  }, [list]);
+  }, [list, version]);
 
   //When there is a change in syllable1, syllable2, syllable3, save the data to local storage
   React.useEffect(() => {
     if (list == 'adjective') {
-      localStorage.setItem('adjectives1', JSON.stringify(syllable1));
-      localStorage.setItem('adjectives2', JSON.stringify(syllable2));
-      localStorage.setItem('adjectives3', JSON.stringify(syllable3));
+      localStorage.setItem('adjectives1' + version, JSON.stringify(syllable1));
+      localStorage.setItem('adjectives2' + version, JSON.stringify(syllable2));
+      localStorage.setItem('adjectives3' + version, JSON.stringify(syllable3));
     } else if (list == 'adverb') {
-      localStorage.setItem('adverb1', JSON.stringify(syllable1));
-      localStorage.setItem('adverb2', JSON.stringify(syllable2));
-      localStorage.setItem('adverb3', JSON.stringify(syllable3));
+      localStorage.setItem('adverb1' + version, JSON.stringify(syllable1));
+      localStorage.setItem('adverb2' + version, JSON.stringify(syllable2));
+      localStorage.setItem('adverb3' + version, JSON.stringify(syllable3));
     } else if (list == 'noun') {
-      localStorage.setItem('noun1', JSON.stringify(syllable1));
-      localStorage.setItem('noun2', JSON.stringify(syllable2));
-      localStorage.setItem('noun3', JSON.stringify(syllable3));
+      localStorage.setItem('noun1' + version, JSON.stringify(syllable1));
+      localStorage.setItem('noun2' + version, JSON.stringify(syllable2));
+      localStorage.setItem('noun3' + version, JSON.stringify(syllable3));
     } else if (list == 'preposition') {
-      localStorage.setItem('preposition1', JSON.stringify(syllable1));
-      localStorage.setItem('preposition2', JSON.stringify(syllable2));
-      localStorage.setItem('preposition3', JSON.stringify(syllable3));
+      localStorage.setItem('preposition1' + version, JSON.stringify(syllable1));
+      localStorage.setItem('preposition2' + version, JSON.stringify(syllable2));
+      localStorage.setItem('preposition3' + version, JSON.stringify(syllable3));
     } else if (list == 'verb') {
-      localStorage.setItem('verb1', JSON.stringify(syllable1));
-      localStorage.setItem('verb2', JSON.stringify(syllable2));
-      localStorage.setItem('verb3', JSON.stringify(syllable3));
+      localStorage.setItem('verb1' + version, JSON.stringify(syllable1));
+      localStorage.setItem('verb2' + version, JSON.stringify(syllable2));
+      localStorage.setItem('verb3' + version, JSON.stringify(syllable3));
     }
   }, [syllable1, syllable2, syllable3]);
 
@@ -113,12 +114,12 @@ export default function HomePage() {
         <section className='bg-white'>
           <div className=' relative flex min-h-screen flex-col items-center  py-12 text-center'>
             {/* <Vercel className='text-5xl' /> */}
-            <h3 className='mt-4'>Password Dataset</h3>
+            <h3 className='mt-4'>Password Dataset (Version {version})</h3>
             {/* Dropdown list */}
             <div>
-              <div className='mt-5'>
+              <div className='mt-5 text-sm'>
                 <select
-                  className='rounded bg-slate-100 px-3 py-1'
+                  className='w-36 rounded bg-slate-100 px-3 py-1'
                   onChange={(e) => {
                     setList(e.target.value);
                   }}
@@ -129,179 +130,232 @@ export default function HomePage() {
                   <option value='noun'>Noun</option>
                   <option value='verb'>Verb</option>
                 </select>
+              </div>
+              <div className='fixed top-0 left-0 ml-5 mt-5 flex w-fit flex-col gap-5'>
+                {/* Undo Button and it sticks to the top of page. After action is done, remove undo item */}
+                <div className=''>
+                  <button
+                    className='rounded bg-slate-100 px-3 py-1 text-sm'
+                    onClick={() => {
+                      if (undo?.action == 'delete') {
+                        if (undo.from == '1') {
+                          const newSyllable1 = [...syllable1, undo.value];
+                          setSyllable1(newSyllable1);
+                        } else if (undo.from == '2') {
+                          const newSyllable2 = [...syllable2, undo.value];
+                          setSyllable2(newSyllable2);
+                        } else if (undo.from == '3') {
+                          const newSyllable3 = [...syllable3, undo.value];
+                          setSyllable3(newSyllable3);
+                        }
+                      } else if (undo?.action == 'move') {
+                        if (undo.from == '1') {
+                          const newSyllable1 = [...syllable1, undo.value];
+                          setSyllable1(newSyllable1);
+                        } else if (undo.from == '2') {
+                          const newSyllable2 = [...syllable2, undo.value];
+                          setSyllable2(newSyllable2);
+                        } else if (undo.from == '3') {
+                          const newSyllable3 = [...syllable3, undo.value];
+                          setSyllable3(newSyllable3);
+                        }
 
-                <div>
-                  Total:{' '}
-                  {syllable1.length + syllable2.length + syllable3.length}{' '}
+                        if (undo.to == '1') {
+                          const newSyllable1 = syllable1.filter(
+                            (item) => item !== undo.value
+                          );
+                          setSyllable1(newSyllable1);
+                        } else if (undo.to == '2') {
+                          const newSyllable2 = syllable2.filter(
+                            (item) => item !== undo.value
+                          );
+                          setSyllable2(newSyllable2);
+                        } else if (undo.to == '3') {
+                          const newSyllable3 = syllable3.filter(
+                            (item) => item !== undo.value
+                          );
+                          setSyllable3(newSyllable3);
+                        }
+                      }
+
+                      setUndo(undefined);
+                    }}
+                  >
+                    Undo
+                  </button>
                 </div>
-              </div>
-              {/* Undo Button and it sticks to the top of page. After action is done, remove undo item */}
-              <div className='fixed top-0 right-0 mt-5 mr-5'>
-                <button
-                  className='rounded bg-slate-100 px-3 py-1'
-                  onClick={() => {
-                    if (undo?.action == 'delete') {
-                      if (undo.from == '1') {
-                        const newSyllable1 = [...syllable1, undo.value];
-                        setSyllable1(newSyllable1);
-                      } else if (undo.from == '2') {
-                        const newSyllable2 = [...syllable2, undo.value];
-                        setSyllable2(newSyllable2);
-                      } else if (undo.from == '3') {
-                        const newSyllable3 = [...syllable3, undo.value];
-                        setSyllable3(newSyllable3);
-                      }
-                    } else if (undo?.action == 'move') {
-                      if (undo.from == '1') {
-                        const newSyllable1 = [...syllable1, undo.value];
-                        setSyllable1(newSyllable1);
-                      } else if (undo.from == '2') {
-                        const newSyllable2 = [...syllable2, undo.value];
-                        setSyllable2(newSyllable2);
-                      } else if (undo.from == '3') {
-                        const newSyllable3 = [...syllable3, undo.value];
-                        setSyllable3(newSyllable3);
-                      }
+                {/* Button at the top left to load the initial data to local storage */}
+                <div className=''>
+                  <button
+                    className='rounded bg-slate-100 px-3 py-1 text-sm'
+                    onClick={() => {
+                      //Ask if user is sure user wants to load the data
+                      const res = confirm(
+                        'Are you sure you want to load the data? This will overwrite your current data.'
+                      );
+                      if (!res) return;
 
-                      if (undo.to == '1') {
-                        const newSyllable1 = syllable1.filter(
-                          (item) => item !== undo.value
-                        );
-                        setSyllable1(newSyllable1);
-                      } else if (undo.to == '2') {
-                        const newSyllable2 = syllable2.filter(
-                          (item) => item !== undo.value
-                        );
-                        setSyllable2(newSyllable2);
-                      } else if (undo.to == '3') {
-                        const newSyllable3 = syllable3.filter(
-                          (item) => item !== undo.value
-                        );
-                        setSyllable3(newSyllable3);
-                      }
-                    }
+                      localStorage.setItem(
+                        'adjectives1' + version,
+                        JSON.stringify(ADJECTIVES1)
+                      );
+                      localStorage.setItem(
+                        'adjectives2' + version,
+                        JSON.stringify(ADJECTIVES2)
+                      );
+                      localStorage.setItem(
+                        'adjectives3' + version,
+                        JSON.stringify(ADJECTIVES3)
+                      );
+                      localStorage.setItem(
+                        'adverb1' + version,
+                        JSON.stringify(ADVERBS1)
+                      );
+                      localStorage.setItem(
+                        'adverb2' + version,
+                        JSON.stringify(ADJECTIVES2)
+                      );
+                      localStorage.setItem(
+                        'adverb3' + version,
+                        JSON.stringify(ADVERBS3)
+                      );
+                      localStorage.setItem(
+                        'noun1' + version,
+                        JSON.stringify(NOUNS1)
+                      );
+                      localStorage.setItem(
+                        'noun2' + version,
+                        JSON.stringify(NOUNS2)
+                      );
+                      localStorage.setItem(
+                        'noun3' + version,
+                        JSON.stringify(NOUNS3)
+                      );
+                      localStorage.setItem(
+                        'preposition1' + version,
+                        JSON.stringify(PREPOSITIONS1)
+                      );
+                      localStorage.setItem(
+                        'preposition2' + version,
+                        JSON.stringify(PREPOSITIONS2)
+                      );
+                      localStorage.setItem(
+                        'preposition3' + version,
+                        JSON.stringify(PREPOSITIONS3)
+                      );
+                      localStorage.setItem(
+                        'verb1' + version,
+                        JSON.stringify(VERBS1)
+                      );
+                      localStorage.setItem(
+                        'verb2' + version,
+                        JSON.stringify(VERBS2)
+                      );
+                      localStorage.setItem(
+                        'verb3' + version,
+                        JSON.stringify(VERBS3)
+                      );
 
-                    setUndo(undefined);
+                      setList('adjective');
+                    }}
+                  >
+                    Load Initial Data
+                  </button>
+                </div>
+                {/* Button at the top left beneath the initial data button that removes all duplicates from the syllables */}
+                {/* <div className=''>
+                  <button
+                    className='rounded bg-slate-100 px-3 py-1 text-sm'
+                    onClick={() => {
+                      //Ask if user is sure user wants to load the data
+                      const res = confirm(
+                        'Are you sure you want to remove all duplicates? This will overwrite your current data.'
+                      );
+                      if (!res) return;
+
+                      const newSyllable1 = syllable1.filter(
+                        (item, index) => syllable1.indexOf(item) === index
+                      );
+                      const newSyllable2 = syllable2.filter(
+                        (item, index) => syllable2.indexOf(item) === index
+                      );
+                      const newSyllable3 = syllable3.filter(
+                        (item, index) => syllable3.indexOf(item) === index
+                      );
+
+                      setSyllable1(newSyllable1);
+                      setSyllable2(newSyllable2);
+                      setSyllable3(newSyllable3);
+
+                      //Copy the data to clipboard in format noun = []
+                    }}
+                  >
+                    Remove Duplicates
+                  </button>
+                </div> */}
+                {/* Drop at the top left that, with options version 1, version 2, and version 3. when a version is selected, use a  */}
+                <select
+                  className=' rounded bg-slate-100 px-10 py-1 text-sm'
+                  onChange={(e) => {
+                    setVersion(e.target.value);
                   }}
                 >
-                  Undo
-                </button>
-              </div>
-              {/* Button at the top left to load the initial data to local storage */}
-              <div className='fixed top-0 left-0 mt-5 ml-5'>
-                <button
-                  className='rounded bg-slate-100 px-3 py-1'
-                  onClick={() => {
-                    //Ask if user is sure user wants to load the data
-                    const res = confirm(
-                      'Are you sure you want to load the data? This will overwrite your current data.'
-                    );
-                    if (!res) return;
+                  <option value='1'>Version 1</option>
+                  <option value='2'>Version 2</option>
+                  <option value='3'>Version 3</option>
+                </select>
+                {/* Button at the top right to save all the data from the local storage into an object-array item like this: adjective:[] */}
+                <div className=''>
+                  <button
+                    className='rounded bg-slate-100 px-3 py-1 text-sm'
+                    onClick={() => {
+                      const data = {
+                        adjective1: localStorage.getItem(
+                          'adjectives1' + version
+                        ),
+                        adjective2: localStorage.getItem(
+                          'adjectives2' + version
+                        ),
+                        adjective3: localStorage.getItem(
+                          'adjectives3' + version
+                        ),
+                        adverb1: localStorage.getItem('adverb1' + version),
+                        adverb2: localStorage.getItem('adverb2' + version),
+                        adverb3: localStorage.getItem('adverb3' + version),
+                        noun1: localStorage.getItem('noun1' + version),
+                        noun2: localStorage.getItem('noun2' + version),
+                        noun3: localStorage.getItem('noun3' + version),
+                        preposition1: localStorage.getItem(
+                          'preposition1' + version
+                        ),
+                        preposition2: localStorage.getItem(
+                          'preposition2' + version
+                        ),
+                        preposition3: localStorage.getItem(
+                          'preposition3' + version
+                        ),
+                        verb1: localStorage.getItem('verb1' + version),
+                        verb2: localStorage.getItem('verb2' + version),
+                        verb3: localStorage.getItem('verb3' + version),
+                      };
 
-                    localStorage.setItem(
-                      'adjectives1',
-                      JSON.stringify(ADJECTIVES1)
-                    );
-                    localStorage.setItem(
-                      'adjectives2',
-                      JSON.stringify(ADJECTIVES2)
-                    );
-                    localStorage.setItem(
-                      'adjectives3',
-                      JSON.stringify(ADJECTIVES3)
-                    );
-                    localStorage.setItem('adverb1', JSON.stringify(ADVERBS1));
-                    localStorage.setItem(
-                      'adverb2',
-                      JSON.stringify(ADJECTIVES2)
-                    );
-                    localStorage.setItem('adverb3', JSON.stringify(ADVERBS3));
-                    localStorage.setItem('noun1', JSON.stringify(NOUNS1));
-                    localStorage.setItem('noun2', JSON.stringify(NOUNS2));
-                    localStorage.setItem('noun3', JSON.stringify(NOUNS3));
-                    localStorage.setItem(
-                      'preposition1',
-                      JSON.stringify(PREPOSITIONS1)
-                    );
-                    localStorage.setItem(
-                      'preposition2',
-                      JSON.stringify(PREPOSITIONS2)
-                    );
-                    localStorage.setItem(
-                      'preposition3',
-                      JSON.stringify(PREPOSITIONS3)
-                    );
-                    localStorage.setItem('verb1', JSON.stringify(VERBS1));
-                    localStorage.setItem('verb2', JSON.stringify(VERBS2));
-                    localStorage.setItem('verb3', JSON.stringify(VERBS3));
+                      console.log(data);
 
-                    setList('adjective');
-                  }}
-                >
-                  Load Initial Data
-                </button>
-              </div>
-              {/* Button at the top left beneath the initial data button that removes all duplicates from the syllables */}
-              <div className='fixed top-0 left-0 mt-20 ml-5'>
-                <button
-                  className='rounded bg-slate-100 px-3 py-1'
-                  onClick={() => {
-                    //Ask if user is sure user wants to load the data
-                    const res = confirm(
-                      'Are you sure you want to remove all duplicates? This will overwrite your current data.'
-                    );
-                    if (!res) return;
-
-                    const newSyllable1 = syllable1.filter(
-                      (item, index) => syllable1.indexOf(item) === index
-                    );
-                    const newSyllable2 = syllable2.filter(
-                      (item, index) => syllable2.indexOf(item) === index
-                    );
-                    const newSyllable3 = syllable3.filter(
-                      (item, index) => syllable3.indexOf(item) === index
-                    );
-
-                    setSyllable1(newSyllable1);
-                    setSyllable2(newSyllable2);
-                    setSyllable3(newSyllable3);
-                  }}
-                >
-                  Remove Duplicates
-                </button>
-              </div>
-
-              {/* Button at the top right to save all the data from the local storage into an object-array item like this: adjective:[] */}
-              <div className='fixed top-0 right-0 mt-20 mr-5'>
-                <button
-                  className='rounded bg-slate-100 px-3 py-1'
-                  onClick={() => {
-                    const data = {
-                      adjective1: localStorage.getItem('adjectives1'),
-                      adjective2: localStorage.getItem('adjectives2'),
-                      adjective3: localStorage.getItem('adjectives3'),
-                      adverb1: localStorage.getItem('adverb1'),
-                      adverb2: localStorage.getItem('adverb2'),
-                      adverb3: localStorage.getItem('adverb3'),
-                      noun1: localStorage.getItem('noun1'),
-                      noun2: localStorage.getItem('noun2'),
-                      noun3: localStorage.getItem('noun3'),
-                      preposition1: localStorage.getItem('preposition1'),
-                      preposition2: localStorage.getItem('preposition2'),
-                      preposition3: localStorage.getItem('preposition3'),
-                      verb1: localStorage.getItem('verb1'),
-                      verb2: localStorage.getItem('verb2'),
-                      verb3: localStorage.getItem('verb3'),
-                    };
-
-                    console.log(data);
-
-                    //copy to clipboard
-                    navigator.clipboard.writeText(JSON.stringify(data));
-                  }}
-                >
-                  Finalize Data
-                </button>
+                      //copy to clipboard
+                      navigator.clipboard.writeText(JSON.stringify(data));
+                    }}
+                  >
+                    Finalize Data
+                  </button>
+                </div>
+                {/* Text at the top left that shows the total count of words in all
+              the lists */}
+                <div className=''>
+                  <div className='rounded bg-slate-100 px-3 py-1 text-sm'>
+                    Words in POS:{' '}
+                    {syllable1.length + syllable2.length + syllable3.length}
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -309,7 +363,21 @@ export default function HomePage() {
               {/*  1 syllable list */}
 
               <div className='mt-10 w-96'>
-                <div className=''>1 Syllable ({syllable1.length})</div>
+                <div className=''>
+                  1 Syllable ({syllable1.length})
+                  {/* Button that copies all the value in the list to the clipboard */}
+                  <button
+                    className='ml-5 rounded bg-slate-100 px-3 py-1 text-xs'
+                    onClick={() => {
+                      //Copy the data to clipboard in format noun = []
+                      navigator.clipboard.writeText(
+                        syllable1.map((word) => word).join('","')
+                      );
+                    }}
+                  >
+                    Copy to Clipboard
+                  </button>
+                </div>
                 <div className=' mt-5 flex flex-col'>
                   {syllable1.map((word, index) => (
                     <div
@@ -396,7 +464,20 @@ export default function HomePage() {
 
               {/*  2 syllable list */}
               <div className='mt-10 w-96'>
-                <div className=''>2 Syllables ({syllable2.length})</div>
+                <div className=''>
+                  2 Syllables ({syllable2.length})
+                  <button
+                    className='ml-5 rounded bg-slate-100 px-3 py-1 text-xs'
+                    onClick={() => {
+                      //Copy the data to clipboard in format noun = []
+                      navigator.clipboard.writeText(
+                        syllable2.map((word) => word).join('","')
+                      );
+                    }}
+                  >
+                    Copy to Clipboard
+                  </button>
+                </div>
                 <div className=' mt-5 flex flex-col'>
                   {syllable2.map((word, index) => (
                     <div
@@ -478,7 +559,20 @@ export default function HomePage() {
 
               {/*  3 syllable list */}
               <div className='mt-10 w-96'>
-                <div className=''>3 Syllables ({syllable3.length})</div>
+                <div className=''>
+                  3 Syllables ({syllable3.length})
+                  <button
+                    className='ml-5 rounded bg-slate-100 px-3 py-1 text-xs'
+                    onClick={() => {
+                      //Copy the data to clipboard in format noun = []
+                      navigator.clipboard.writeText(
+                        syllable3.map((word) => word).join('","')
+                      );
+                    }}
+                  >
+                    Copy to Clipboard
+                  </button>
+                </div>
                 <div className=' mt-5 flex flex-col'>
                   {syllable3.map((word, index) => (
                     <div
