@@ -114,7 +114,15 @@ export default function HomePage() {
         <section className='bg-white'>
           <div className=' relative flex min-h-screen flex-col items-center  py-12 text-center'>
             {/* <Vercel className='text-5xl' /> */}
-            <h3 className='mt-4'>Password Dataset (Version {version})</h3>
+            <h3 className='mt-4'>
+              Password Dataset (Version{' '}
+              {version == '1'
+                ? 'Shagun'
+                : version == '2'
+                ? 'Kristina'
+                : 'Ainazik'}
+              )
+            </h3>
             {/* Dropdown list */}
             <div>
               <div className='mt-5 text-sm'>
@@ -300,9 +308,9 @@ export default function HomePage() {
                     setVersion(e.target.value);
                   }}
                 >
-                  <option value='1'>Version 1</option>
-                  <option value='2'>Version 2</option>
-                  <option value='3'>Version 3</option>
+                  <option value='1'>Version Shagun</option>
+                  <option value='2'>Version Kristina</option>
+                  <option value='3'>Version Ainazik</option>
                 </select>
                 {/* Button at the top right to save all the data from the local storage into an object-array item like this: adjective:[] */}
                 <div className=''>
