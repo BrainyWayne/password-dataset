@@ -661,7 +661,7 @@ export default function HomePage() {
                         }}
                         className='flex h-8 w-8 items-center justify-center rounded-full bg-green-400 text-center transition-all hover:scale-105 '
                       >
-                        3S
+                        2S
                       </div>
                     </div>
                   ))}
