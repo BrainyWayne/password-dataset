@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <title>Your Welcome Strangers signup code.</title>
+
+    <style>
+      :root {
+        --dark-green: #005c5d;
+        --gray: #f7f6f5;
+      }
+
+      body {
+        padding: 0;
+        margin: 0;
+
+        font-family: 'Inter', sans-serif;
+      }
+
+      p {
+        line-height: 170%;
+      }
+      .text-sm {
+        font-size: 14px;
+      }
+      header figure {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-block: 3rem;
+      }
+
+      img {
+        width: 150px;
+      }
+
+      .font-vollkorn {
+        font-family: 'Vollkorn', serif;
+      }
+
+      .container {
+        margin-inline: auto;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .bg-green {
+        background-color: #005c5d;
+      }
+      .bg-gray {
+        background-color: #f7f6f5;
+      }
+
+      .code {
+        border: 1.5px solid #005c5d;
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        font-size: 32px;
+        font-weight: bold;
+        color: #005c5d;
+        border-radius: 0.3rem;
+      }
+      .text-center {
+        text-align: center;
+      }
+
+      .v-whitespace {
+        padding-block: 4rem;
+      }
+      .v-whitespace-sm {
+        padding-block: 2rem;
+      }
+
+      .footer-wrapper {
+        text-align: center;
+      }
+
+      .nav-items {
+        margin: 0;
+      }
+
+      @media (min-width: 768px) {
+        .footer-wrapper {
+          text-align: left !important;
+          display: flex;
+        }
+        .nav-items {
+          margin: 2rem 0 0;
+        }
+
+        .footer-content {
+          margin-left: 3rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="bg-gray v-whitespace" style="border-radius: 5px">
+      <div class="container">
+        <div class="text-center">
+          <h1
+            class="font-vollkorn"
+            style="
+              font-size: 28px;
+              margin-top: 10px;
+              padding-top: 20px;
+              padding-bottom: 20px;
+            "
+          >
+            Hi there! <br />
+            Please use this code to login.
+          </h1>
+
+          <div class="code font-vollkorn" style="font-size: 32px">
+            {{ params.code }}
+          </div>
+        </div>
+        <p style="margin-top: 2rem" class="text-sm">
+          You received this email due to an attempt to log in from a browser or
+          mobile device at {{ params.ip }}. No one can log into your account
+          without access to this email address.
+        </p>
+        <strong style="padding-bottom: 2rem" class="text-sm">
+          This code will expire in 30 minutes.</strong
+        >
+        <h1 style="margin-top: 10px"></h1>
+      </div>
+    </section>
+
+    <!-- This notice has been sent to the email address email associated with your -->
+
+    <section class="v-whitespace-sm" style="margin-top: 2rem">
+      <p class="container" style="color: black">
+        This notice has been sent to the email address email associated with
+        your Welcome Strangers account. This email was generated automatically.
+        Please don't reply to it. If you need help, please contact
+        <a href="" style="color: #005c5d; font-weight: 600"
+          >Welcome Strangers Support.</a
+        >
+      </p>
+    </section>
+
+    <!-- Footer -->
+    <section class="bg-green" style="border-radius: 5px">
+      <div class="v-whitespace footer-wrapper container">
+        <figure>
+          <img
+            src="https://img.mailinblue.com/5312009/images/content_library/original/63844ddba798b64c542d1282.png"
+            border="0"
+            style="margin-top: 20px"
+          />
+        </figure>
+        <div style="color: #f7f6f5; margin-top: 0.5rem" class="footer-content">
+          <p>
+            Welcome Strangers invites you to social experiences designed to help
+            you connect with others in your local community.
+          </p>
+          <div
+            class="nav-items"
+            style="
+              display: flex;
+              align-items: center;
+              flex-wrap: wrap;
+              list-style-type: none;
+              padding: 0;
+              justify-center: center;
+              width: 100%;
+            "
+          >
+            <div>Privacy</div>
+            &nbsp;|&nbsp;
+            <div>Terms</div>
+            &nbsp;|&nbsp;
+            <div>Contact us</div>
+            &nbsp;|&nbsp;
+            <div>Unsubscribe</div>
+          </div>
+          <p style="font-size: 14px; margin-top: 20px; margin-bottom: 20px">
+            © 2023 Welcome Strangers. All rights reserved.
+          </p>
+          <div style="margin-top: 15px"></div>
+        </div>
+      </div>
+      <!-- <div class="container">
+        <h5>Welcome Strangers</h5>
+        <p></p>
+        <a
+          href="{{ unsubscribe }}"
+          target="_blank"
+          style="color: #0092ff; text-decoration: underline"
+          >Unsubscribe</a
+        >
+      </div> -->
+    </section>
+  </body>
+</html>

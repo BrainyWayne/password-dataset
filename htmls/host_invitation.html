@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invites</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style type="text/css">
+      :root {
+        --dark-green: #005c5d;
+        --gray: #f7f6f5;
+      }
+
+      body,
+      ::before,
+      ::after {
+        padding: 0;
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+      }
+
+      p {
+        line-height: 170%;
+      }
+      .text-sm {
+        font-size: 14px;
+      }
+      header figure {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 2rem;
+      }
+
+      img {
+        width: 200px;
+        height: auto;
+      }
+
+      .font-vollkorn {
+        font-family: 'Vollkorn', serif;
+      }
+
+      .container {
+        margin: 0 auto;
+        padding: 0 1rem !important;
+      }
+
+      .bg-green {
+        background-color: #005c5d;
+      }
+      .bg-gray {
+        background-color: #f7f6f5;
+      }
+
+      .code {
+        border: 1.5px #80c7bc;
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        font-size: 32px;
+        font-weight: bold;
+        color: #005c5d;
+        border-radius: 0.3rem;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .v-whitespace {
+        padding: 4rem 0 !important;
+      }
+
+      .v-whitespace-sm {
+        padding: 2rem 0 !important;
+      }
+
+      .link-btn {
+        display: block;
+        max-width: 316px;
+        margin: auto;
+        text-align: center;
+        background-color: #005c5d;
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.2rem;
+      }
+
+      @media (min-width: 768px) {
+        footer > div.container {
+          display: flex;
+        }
+      }
+    </style>
+
+    <style>
+      /* Card container */
+      .card {
+        display: flex;
+        flex-direction: row;
+        background-color: #fff;
+        transition: 0.3s;
+        border-radius: 5px;
+        margin: auto;
+        border: 1px solid lightgray;
+        padding: 15px;
+      }
+
+      /* Card image */
+      .card img {
+        height: 100px;
+        width: 100px;
+      }
+
+      /* Card content */
+      .card .content {
+        text-align: left;
+        padding: 10px;
+      }
+
+      /* Card title */
+      .card .content h3 {
+        margin: 0;
+        color: #333;
+        font-size: 14px;
+      }
+
+      /* Card text */
+      .card .content p {
+        margin: 0;
+        color: #777;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <article class="container" style="margin-top: 3rem">
+        <h1 class="font-size: 24px; padding: 0 1rem; text-align: center">
+          You&apos;ve been invited to host an event.
+        </h1>
+      </article>
+
+      <div
+        class="container"
+        style="
+          display: flex;
+          flex-direction: column;
+          gap: 30px;
+          margin-bottom: 70px;
+        "
+      >
+        <div class="card" style="padding: 0; font-size: 14px; margin: 0">
+          <div style="border-right: 1px solid lightgray; padding: 1rem">
+            <strong>{{params.day}}</strong>
+            <div style="margin: 0.5rem 0">{{params.fullDate}}</div>
+            <div style="display: flex; align-items: cent2er; gap: px">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="{1.5}"
+                stroke="currentColor"
+                style="height: 20px; width: 20px"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              {{params.time}}
+            </div>
+          </div>
+          <div class="content" style="padding: 1rem">
+            <h3>{{params.venueName}}</h3>
+            <p style="margin: 0.5rem 0; line-height: 110%">
+              {{params.seatsRemaining}} seats remaining
+            </p>
+
+            <div style="display: flex; gap: 10px; margin-top: 1.5rem">
+              <a href="{{params.acceptUrl}}" class="link-btn">Accept</a>
+              <a
+                href="{{params.cancelUrl}}"
+                class="link-btn"
+                style="padding: 0.5rem"
+                >Learn more</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <section class="bg-green" style="border-radius: 5px">
+        <div class="v-whitespace footer-wrapper container">
+          <figure>
+            <img
+              src="https://img.mailinblue.com/5312009/images/content_library/original/63844ddba798b64c542d1282.png"
+              border="0"
+              style="margin-top: 20px"
+            />
+          </figure>
+          <div
+            style="color: #f7f6f5; margin-top: 0.5rem"
+            class="footer-content"
+          >
+            <p>
+              Welcome Strangers invites you to social experiences designed to
+              help you connect with others in your local community.
+            </p>
+            <div
+              class="nav-items"
+              style="
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                list-style-type: none;
+                padding: 0;
+                justify-center: center;
+                width: 100%;
+              "
+            >
+              <div>Privacy</div>
+              &nbsp;|&nbsp;
+              <div>Terms</div>
+              &nbsp;|&nbsp;
+              <div>Contact us</div>
+              &nbsp;|&nbsp;
+              <div>Unsubscribe</div>
+            </div>
+            <p style="font-size: 14px; margin-top: 20px; margin-bottom: 20px">
+              © 2023 Welcome Strangers. All rights reserved.
+            </p>
+            <div style="margin-top: 15px"></div>
+          </div>
+        </div>
+        <!-- <div class="container">
+        <h5>Welcome Strangers</h5>
+        <p></p>
+        <a
+          href="{{ unsubscribe }}"
+          target="_blank"
+          style="color: #0092ff; text-decoration: underline"
+          >Unsubscribe</a
+        >
+      </div> -->
+      </section>
+    </main>
+  </body>
+</html>
