@@ -26,7 +26,7 @@ export default function HomePage() {
   const [syllable2, setSyllable2] = useState<string[]>([]);
   const [syllable3, setSyllable3] = useState<string[]>([]);
   const [version, setVersion] = useState('1');
-  const [bookmark, setBookmark] = useState();
+  const [bookmark, setBookmark] = useState<any>();
   const [undo, setUndo] = useState<{
     action: 'delete' | 'move';
     value: string;
