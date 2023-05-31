@@ -29,21 +29,21 @@ export default function NewDataPage() {
 
   //Handle list change. Get the data from local storage
   React.useEffect(() => {
-    const adjectives1 = localStorage.getItem('adjectives1' + version);
-    const adjectives2 = localStorage.getItem('adjectives2' + version);
-    const adjectives3 = localStorage.getItem('adjectives3' + version);
-    const adverb1 = localStorage.getItem('adverb1' + version);
-    const adverb2 = localStorage.getItem('adverb2' + version);
-    const adverb3 = localStorage.getItem('adverb3' + version);
-    const noun1 = localStorage.getItem('noun1' + version);
-    const noun2 = localStorage.getItem('noun2' + version);
-    const noun3 = localStorage.getItem('noun3' + version);
-    const preposition1 = localStorage.getItem('preposition1' + version);
-    const preposition2 = localStorage.getItem('preposition2' + version);
-    const preposition3 = localStorage.getItem('preposition3' + version);
-    const verb1 = localStorage.getItem('verb1' + version);
-    const verb2 = localStorage.getItem('verb2' + version);
-    const verb3 = localStorage.getItem('verb3' + version);
+    const adjectives1 = localStorage.getItem('nadjectives1' + version);
+    const adjectives2 = localStorage.getItem('nadjectives2' + version);
+    const adjectives3 = localStorage.getItem('nadjectives3' + version);
+    const adverb1 = localStorage.getItem('nadverb1' + version);
+    const adverb2 = localStorage.getItem('nadverb2' + version);
+    const adverb3 = localStorage.getItem('nadverb3' + version);
+    const noun1 = localStorage.getItem('nnoun1' + version);
+    const noun2 = localStorage.getItem('nnoun2' + version);
+    const noun3 = localStorage.getItem('nnoun3' + version);
+    const preposition1 = localStorage.getItem('npreposition1' + version);
+    const preposition2 = localStorage.getItem('npreposition2' + version);
+    const preposition3 = localStorage.getItem('npreposition3' + version);
+    const verb1 = localStorage.getItem('nverb1' + version);
+    const verb2 = localStorage.getItem('nverb2' + version);
+    const verb3 = localStorage.getItem('nverb3' + version);
 
     if (list == 'adjective') {
       setSyllable1(JSON.parse(adjectives1 ?? '[]'));
@@ -75,25 +75,34 @@ export default function NewDataPage() {
   //When there is a change in syllable1, syllable2, syllable3, save the data to local storage
   React.useEffect(() => {
     if (list == 'adjective') {
-      localStorage.setItem('adjectives1' + version, JSON.stringify(syllable1));
-      localStorage.setItem('adjectives2' + version, JSON.stringify(syllable2));
-      localStorage.setItem('adjectives3' + version, JSON.stringify(syllable3));
+      localStorage.setItem('nadjectives1' + version, JSON.stringify(syllable1));
+      localStorage.setItem('nadjectives2' + version, JSON.stringify(syllable2));
+      localStorage.setItem('nadjectives3' + version, JSON.stringify(syllable3));
     } else if (list == 'adverb') {
-      localStorage.setItem('adverb1' + version, JSON.stringify(syllable1));
-      localStorage.setItem('adverb2' + version, JSON.stringify(syllable2));
-      localStorage.setItem('adverb3' + version, JSON.stringify(syllable3));
+      localStorage.setItem('nadverb1' + version, JSON.stringify(syllable1));
+      localStorage.setItem('nadverb2' + version, JSON.stringify(syllable2));
+      localStorage.setItem('nadverb3' + version, JSON.stringify(syllable3));
     } else if (list == 'noun') {
-      localStorage.setItem('noun1' + version, JSON.stringify(syllable1));
-      localStorage.setItem('noun2' + version, JSON.stringify(syllable2));
-      localStorage.setItem('noun3' + version, JSON.stringify(syllable3));
+      localStorage.setItem('nnoun1' + version, JSON.stringify(syllable1));
+      localStorage.setItem('nnoun2' + version, JSON.stringify(syllable2));
+      localStorage.setItem('nnoun3' + version, JSON.stringify(syllable3));
     } else if (list == 'preposition') {
-      localStorage.setItem('preposition1' + version, JSON.stringify(syllable1));
-      localStorage.setItem('preposition2' + version, JSON.stringify(syllable2));
-      localStorage.setItem('preposition3' + version, JSON.stringify(syllable3));
+      localStorage.setItem(
+        'npreposition1' + version,
+        JSON.stringify(syllable1)
+      );
+      localStorage.setItem(
+        'npreposition2' + version,
+        JSON.stringify(syllable2)
+      );
+      localStorage.setItem(
+        'npreposition3' + version,
+        JSON.stringify(syllable3)
+      );
     } else if (list == 'verb') {
-      localStorage.setItem('verb1' + version, JSON.stringify(syllable1));
-      localStorage.setItem('verb2' + version, JSON.stringify(syllable2));
-      localStorage.setItem('verb3' + version, JSON.stringify(syllable3));
+      localStorage.setItem('nverb1' + version, JSON.stringify(syllable1));
+      localStorage.setItem('nverb2' + version, JSON.stringify(syllable2));
+      localStorage.setItem('nverb3' + version, JSON.stringify(syllable3));
     }
   }, [syllable1, syllable2, syllable3]);
 
@@ -176,41 +185,53 @@ export default function NewDataPage() {
                   if (!res) return;
 
                   localStorage.setItem(
-                    'adjectives1' + version,
+                    'nadjectives1' + version,
                     JSON.stringify(ADJECTIVE)
                   );
                   localStorage.setItem(
-                    'adjectives2' + version,
+                    'nadjectives2' + version,
                     JSON.stringify([])
                   );
                   localStorage.setItem(
-                    'adjectives3' + version,
+                    'nadjectives3' + version,
                     JSON.stringify([])
                   );
                   localStorage.setItem(
-                    'adverb1' + version,
+                    'nadverb1' + version,
                     JSON.stringify(ADVERB)
                   );
-                  localStorage.setItem('adverb2' + version, JSON.stringify([]));
-                  localStorage.setItem('adverb3' + version, JSON.stringify([]));
-                  localStorage.setItem('noun1' + version, JSON.stringify(NOUN));
-                  localStorage.setItem('noun2' + version, JSON.stringify([]));
-                  localStorage.setItem('noun3' + version, JSON.stringify([]));
                   localStorage.setItem(
-                    'preposition1' + version,
+                    'nadverb2' + version,
+                    JSON.stringify([])
+                  );
+                  localStorage.setItem(
+                    'nadverb3' + version,
+                    JSON.stringify([])
+                  );
+                  localStorage.setItem(
+                    'nnoun1' + version,
+                    JSON.stringify(NOUN)
+                  );
+                  localStorage.setItem('nnoun2' + version, JSON.stringify([]));
+                  localStorage.setItem('nnoun3' + version, JSON.stringify([]));
+                  localStorage.setItem(
+                    'npreposition1' + version,
                     JSON.stringify(PREPOSITION)
                   );
                   localStorage.setItem(
-                    'preposition2' + version,
+                    'npreposition2' + version,
                     JSON.stringify([])
                   );
                   localStorage.setItem(
-                    'preposition3' + version,
+                    'npreposition3' + version,
                     JSON.stringify([])
                   );
-                  localStorage.setItem('verb1' + version, JSON.stringify(VERB));
-                  localStorage.setItem('verb2' + version, JSON.stringify([]));
-                  localStorage.setItem('verb3' + version, JSON.stringify([]));
+                  localStorage.setItem(
+                    'nverb1' + version,
+                    JSON.stringify(VERB)
+                  );
+                  localStorage.setItem('nverb2' + version, JSON.stringify([]));
+                  localStorage.setItem('nverb3' + version, JSON.stringify([]));
 
                   setList('adjective');
                 }}
@@ -266,27 +287,27 @@ export default function NewDataPage() {
                 className='rounded bg-slate-100 px-3 py-1 text-sm'
                 onClick={() => {
                   const data = {
-                    adjective1: localStorage.getItem('adjectives1' + version),
-                    adjective2: localStorage.getItem('adjectives2' + version),
-                    adjective3: localStorage.getItem('adjectives3' + version),
-                    adverb1: localStorage.getItem('adverb1' + version),
-                    adverb2: localStorage.getItem('adverb2' + version),
-                    adverb3: localStorage.getItem('adverb3' + version),
-                    noun1: localStorage.getItem('noun1' + version),
-                    noun2: localStorage.getItem('noun2' + version),
-                    noun3: localStorage.getItem('noun3' + version),
+                    adjective1: localStorage.getItem('nadjectives1' + version),
+                    adjective2: localStorage.getItem('nadjectives2' + version),
+                    adjective3: localStorage.getItem('nadjectives3' + version),
+                    adverb1: localStorage.getItem('nadverb1' + version),
+                    adverb2: localStorage.getItem('nadverb2' + version),
+                    adverb3: localStorage.getItem('nadverb3' + version),
+                    noun1: localStorage.getItem('nnoun1' + version),
+                    noun2: localStorage.getItem('nnoun2' + version),
+                    noun3: localStorage.getItem('nnoun3' + version),
                     preposition1: localStorage.getItem(
-                      'preposition1' + version
+                      'npreposition1' + version
                     ),
                     preposition2: localStorage.getItem(
-                      'preposition2' + version
+                      'npreposition2' + version
                     ),
                     preposition3: localStorage.getItem(
-                      'preposition3' + version
+                      'npreposition3' + version
                     ),
-                    verb1: localStorage.getItem('verb1' + version),
-                    verb2: localStorage.getItem('verb2' + version),
-                    verb3: localStorage.getItem('verb3' + version),
+                    verb1: localStorage.getItem('nverb1' + version),
+                    verb2: localStorage.getItem('nverb2' + version),
+                    verb3: localStorage.getItem('nverb3' + version),
                   };
 
                   console.log(data);
